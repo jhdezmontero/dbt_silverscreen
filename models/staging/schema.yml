@@ -1,0 +1,71 @@
+version: 2
+
+models:
+  - name: stg_movie_catalogue
+    description: "Cleaned movie catalogue containing descriptive metadata for all films."
+    columns:
+      - name: movie_id
+        description: "Unique primary identifier for the movie."
+        tests:
+          - unique
+          - not_null
+
+      - name: movie_title
+        description: "The official title of the movie."
+
+      - name: studio
+        description: "Standardized movie studio name (e.g., Disney)."
+        tests:
+          - not_null
+
+  - name: stg_invoices
+    description: "Cleaned monthly rental invoice data with formatting and punctuation normalized."
+    columns:
+      - name: movie_id
+        description: "Movie ID referenced on the rental invoice."
+        tests:
+          - not_null
+
+      - name: location_id
+        description: "Theater location ID associated with the invoice."
+        tests:
+          - not_null
+          - accepted_values:
+              arguments:
+                values: ['NJ_001', 'NJ_002', 'NJ_003']
+
+      - name: month
+        description: "The billing month for the rental cost."
+        tests:
+          - not_null
+
+  - name: stg_location_sales
+    description: "Harmonized sales and transaction data unioned across all New Jersey locations (NJ_001, NJ_002, NJ_003)."
+    columns:
+      - name: movie_id
+        description: "Standardized movie ID extracted from sales records."
+        tests:
+          - not_null
+
+      - name: location_id
+        description: "The specific NJ theater location identifier."
+        tests:
+          - not_null
+          - accepted_values:
+              arguments:
+                values: ['NJ_001', 'NJ_002', 'NJ_003']
+
+      - name: month
+        description: "The sales month truncated to the first day of the month."
+        tests:
+          - not_null
+
+      - name: tickets_sold
+        description: "Number of tickets sold in the transaction period."
+        tests:
+          - not_null
+
+      - name: revenue
+        description: "Total revenue generated from tickets."
+        tests:
+          - not_null

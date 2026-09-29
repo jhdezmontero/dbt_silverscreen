@@ -1,0 +1,53 @@
+version: 2
+
+models:
+  - name: mart_mthly_theater_performance
+    description: "Final monthly reporting mart aggregating sales, movie metadata, and rental costs by theater location and film."
+    columns:
+      - name: unique_row_id
+        description: "Surrogate primary key generated from movie_id, location_id, and month."
+        tests:
+          - unique
+          - not_null
+
+      - name: movie_id
+        description: "Unique identifier for the movie."
+        tests:
+          - not_null
+
+      - name: movie_title
+        description: "The official title of the movie."
+
+      - name: genre
+        description: "Movie genre classification."
+
+      - name: studio
+        description: "Studio responsible for the film."
+
+      - name: month
+        description: "The first day of the month for the reporting period."
+        tests:
+          - not_null
+
+      - name: location_id
+        description: "The NJ theater location identifier."
+        tests:
+          - not_null
+          - accepted_values:
+              arguments:
+                values: ['NJ_001', 'NJ_002', 'NJ_003']
+
+      - name: total_rental_cost
+        description: "Total monthly rental cost for the movie at the specific location (defaulted to 0 if missing)."
+        tests:
+          - not_null
+
+      - name: total_tickets_sold
+        description: "Total volume of tickets sold during the month."
+        tests:
+          - not_null
+
+      - name: total_revenue
+        description: "Total revenue generated from ticket sales."
+        tests:
+          - not_null
