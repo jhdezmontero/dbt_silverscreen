@@ -33,7 +33,7 @@ sources:
             description: Runtime of the movie in minutes.
 
       - name: invoices
-        description: Raw data representing the invoices issued for showing a specific movie at various theater locations during different months. Data was passed by “Silver Screen” accountants.
+        description: Raw data representing the invoices issued for showing a specific movie at various theater locations during different months with different release dates. Data was passed by “Silver Screen” accountants.
         columns:
           - name: movie_id
             description: Unique identifier for each movie linked to movie_catalogue.movie_id.
@@ -42,6 +42,7 @@ sources:
           - name: invoice_id
             description: A unique identifier for each invoice issued for a specific movie at a specific location during a particular month.
             tests:
+              - unique
               - not_null
           - name: month
             description: Month in which the invoice was issue in format 'DD.MM.YYYY'.
