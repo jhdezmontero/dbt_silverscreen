@@ -1,7 +1,7 @@
 version: 2
 
 models:
-  - name: mart_mthly_theater_performance
+  - name: mart_mthly_performance
     description: "Final monthly reporting mart aggregating sales, movie metadata, and rental costs by theater location and film."
     columns:
       - name: unique_row_id
@@ -37,6 +37,9 @@ models:
               arguments:
                 values: ['NJ_001', 'NJ_002', 'NJ_003']
 
+      - name: mthly_rental_invoices
+        description: "Number of invoices per movie_id, location_id and month."
+      
       - name: total_rental_cost
         description: "Total monthly rental cost for the movie at the specific location (defaulted to 0 if missing)."
         tests:
