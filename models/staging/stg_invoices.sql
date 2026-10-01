@@ -21,12 +21,6 @@ cleaned as (
         total_invoice_sum as total_rental_cost
 
     from source
-
-    -- Keep only the first instance for each movie_id and invoice_id combination
-    qualify row_number() over (
-        partition by movie_id, invoice_id 
-        order by month desc
-    ) = 1
 )
 
 select * from cleaned
