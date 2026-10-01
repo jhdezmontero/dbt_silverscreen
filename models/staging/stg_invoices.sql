@@ -1,3 +1,5 @@
+-- models/staging/stg_invoices.sql
+
 with source as (
     select * from {{ source('silverscreen', 'invoices') }}
 ),
@@ -12,11 +14,8 @@ cleaned as (
         
         location_id,
         
-        -- Clean trailing dots and spaces using regex, then standardize Disney studios
-        case 
-            when trim(regexp_replace(studio, '\\.+$', '')) in ('Disney', 'Walt Disney') then 'Walt Disney Pictures'
-            else trim(regexp_replace(studio, '\\.+$', ''))
-        end as studio,
+        -- Standarize studio names using standarize_studio macro
+        {{ standarize_studio('studio') }} as studio,
         
         weekly_price as weekly_rental_cost,
         total_invoice_sum as total_rental_cost

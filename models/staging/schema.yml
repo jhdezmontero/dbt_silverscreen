@@ -14,12 +14,12 @@ models:
         description: "The official title of the movie."
 
       - name: studio
-        description: "Standardized movie studio name (e.g., Disney)."
+        description: "Standardized movie studio name and remove trailing spaces and punctuation."
         tests:
           - not_null
 
   - name: stg_invoices
-    description: "Cleaned monthly rental invoice data with formatting and punctuation normalized."
+    description: "Cleaned monthly rental invoice data without duplicates"
     columns:
       - name: movie_id
         description: "Movie ID referenced on the rental invoice."

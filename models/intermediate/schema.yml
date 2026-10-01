@@ -1,0 +1,66 @@
+version: 2
+
+models:
+  - name: int_monthly_sales_location
+    description: "Intermediate model aggregating raw sales transactions to a monthly grain per movie and theater location."
+    columns:
+      - name: month
+        description: "The first day of the reporting month."
+        tests:
+          - not_null
+
+      - name: movie_id
+        description: "Unique identifier for the movie."
+        tests:
+          - not_null
+
+      - name: location_id
+        description: "The NJ theater location identifier."
+        tests:
+          - not_null
+
+      - name: tickets_sold
+        description: "Total volume of tickets sold for this combination."
+        tests:
+          - not_null
+
+      - name: revenue
+        description: "Total revenue generated for this combination."
+        tests:
+          - not_null
+
+  - name: int_movie_invoices
+    description: "Intermediate model aggregating rental invoices monthly and enriching them with movie catalogue metadata."
+    columns:
+      - name: month
+        description: "The first day of the reporting month."
+        tests:
+          - not_null
+
+      - name: movie_id
+        description: "Unique identifier for the movie."
+        tests:
+          - not_null
+
+      - name: location_id
+        description: "The NJ theater location identifier."
+        tests:
+          - not_null
+
+      - name: movie_title
+        description: "The official title of the movie."
+
+      - name: genre
+        description: "Movie genre classification."
+
+      - name: studio
+        description: "Standardized studio name."
+
+      - name: weekly_rental_cost
+        description: "Sum of weekly rental costs for the month."
+
+      - name: total_rental_cost
+        description: "Sum of total rental costs for the month."
+
+      - name: mthly_rental_invoices
+        description: "Count of distinct rental invoices processed for each month, movie and location combination."
