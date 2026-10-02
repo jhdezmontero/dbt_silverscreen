@@ -58,12 +58,12 @@ The final mart model structures the data into a single, comprehensive table cont
 dbt deps
 ```
 
-## Run the Pipeline
+2. **Run the Pipeline**
 ```bash 
 dbt build
 ```
 
-## View documentation
+2. **View documentation**
 
 ```bash 
 dbt docs generate
